@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { Form, InputNumber, Button } from "antd";
+import { Flex, Form, InputNumber, Button, Typography, Card, Row, Col, Space } from "antd";
 import type { FormProps } from 'antd';
 
 const TOKEN_DURATION = 30 * 60 * 1000; // 30 minutes validity
 const [MIN, MAX, DEFAULTVALUE] = [0, 10, 3];
-const RULES = [{ required: true, message: 'Please input a number between 0 and 10!' }];
+const RULES = [{ required: true, message: 'Please input a number greater than 0!' }];
 const WORKOUTVALUES = [
   'bicepCurl',
   'hammerCurl',
@@ -24,43 +24,55 @@ function Home() {
   };
 
   return (
-    <>
-      <h1 className="font-sans text-4xl text-center font-bold">Workout Timer</h1>
-      <Form
-        name="form"
-        initialValues={{
-          ...Object.fromEntries(WORKOUTVALUES.map(field => [field, DEFAULTVALUE])),
-          workoutPeriod: 40,
-          restPeriod: 30
-        }}
-        onFinish={onFinish}
-        autoComplete="off"
-      >
-      {WORKOUTVALUES.map((field) => {
-        return (
-          <Form.Item
-            key={field}
-            rules={RULES}
-            name={field}
-            label={field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1')}
-          >
-            <InputNumber min={MIN} max={MAX} />
+    <Flex justify="center" align="center" className="h-screen">
+    <Space direction="vertical" size="large" style={{ width: '100%', maxWidth: 600, margin: 'auto', padding: '2rem' }}>
+      <Typography.Title level={2} style={{ textAlign: 'center' }}>Workout Timer</Typography.Title>
+      <Card style={{ borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+        <Form
+          layout="vertical"
+          name="form"
+          initialValues={{
+            ...Object.fromEntries(WORKOUTVALUES.map(field => [field, DEFAULTVALUE])),
+            workoutPeriod: 40,
+            restPeriod: 30
+          }}
+          onFinish={onFinish}
+          autoComplete="off"
+        >
+          <Row gutter={16}>
+            {WORKOUTVALUES.map(field => (
+              <Col span={12} key={field}>
+                <Form.Item
+                  rules={RULES}
+                  name={field}
+                  label={field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1')}
+                >
+                  <InputNumber min={MIN} max={MAX} style={{ width: '100%' }} />
+                </Form.Item>
+              </Col>
+            ))}
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item rules={RULES} name="workoutPeriod" label="Workout Period">
+                <InputNumber min={0} max={120} style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item rules={RULES} name="restPeriod" label="Resting Period">
+                <InputNumber min={0} max={60} style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Form.Item className="text-center">
+            <Button type="primary" htmlType="submit" size="large">
+              Submit
+            </Button>
           </Form.Item>
-        );
-      })}
-        <Form.Item rules={RULES} name="workoutPeriod" label="Workout Period">
-          <InputNumber min={30} max={120} />
-        </Form.Item>
-        <Form.Item rules={RULES} name="restPeriod" label="Resting Period">
-          <InputNumber min={0} max={60} />
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
-    </>
+        </Form>
+      </Card>
+    </Space>
+    </Flex>
   );
 }
 
