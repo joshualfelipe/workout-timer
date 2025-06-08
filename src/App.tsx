@@ -1,4 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Layout, Flex } from 'antd';
+import { Content, Footer } from 'antd/es/layout/layout';
 import './App.css'
 import Home from './components/Home.tsx';
 import PageNotFound from './components/PageNotFound.tsx';
@@ -20,7 +22,18 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Flex className="h-screen">
+      <Layout>
+        <Content className='bg-white'>
+            <RouterProvider router={router} />
+        </Content>
+        <Footer style={{ background: 'white' }}>
+          <h1 className="text-l text-center font-bold p-2">© 2025 Joshua Felipe</h1>
+        </Footer>
+      </Layout>
+    </Flex>
+);
 }
 
 export default App
