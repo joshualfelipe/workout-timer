@@ -25,8 +25,8 @@ function Home() {
 
   return (
     <Flex justify="center" align="center" className="h-screen">
-    <Space direction="vertical" size="large" style={{ width: '100%', maxWidth: 600, margin: 'auto', padding: '2rem' }}>
-      <Typography.Title level={2} style={{ textAlign: 'center' }}>Workout Timer</Typography.Title>
+    <Space direction="vertical" size="small" className="w-full max-w-lg p-2">
+      <Typography.Title level={1} className="text-center">Workout Timer</Typography.Title>
       <Card style={{ borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
         <Form
           layout="vertical"
