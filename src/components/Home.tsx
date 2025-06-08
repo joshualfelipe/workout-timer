@@ -47,7 +47,7 @@ function Home() {
                   name={field}
                   label={field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1')}
                 >
-                  <InputNumber min={MIN} max={MAX} style={{ width: '100%' }} />
+                  <InputNumber min={MIN} max={MAX} style={{ width: '100%' }} suffix="reps / arm" />
                 </Form.Item>
               </Col>
             ))}
@@ -55,12 +55,12 @@ function Home() {
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item rules={RULES} name="workoutPeriod" label="Workout Period">
-                <InputNumber min={0} max={120} style={{ width: '100%' }} />
+                <InputNumber min={0} max={120} style={{ width: '100%' }} suffix="secs" />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item rules={RULES} name="restPeriod" label="Resting Period">
-                <InputNumber min={0} max={60} style={{ width: '100%' }} />
+                <InputNumber min={0} max={60} style={{ width: '100%' }} suffix="secs" />
               </Form.Item>
             </Col>
           </Row>
