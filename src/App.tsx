@@ -1,26 +1,39 @@
-import { Flex, Layout } from "antd";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Layout, Flex } from 'antd';
+import { Content, Footer } from 'antd/es/layout/layout';
 import './App.css'
-import { Content, Footer } from "antd/es/layout/layout";
+import Home from './components/Home.tsx';
+import PageNotFound from './components/PageNotFound.tsx';
+import CountDown from './components/workout.tsx';
+import ProtectedRoute from './components/ProtectedRoute.tsx';
 
+
+const router = createBrowserRouter([
+  { path: '/', element: <Home /> },
+  {
+    path: '/workout',
+    element: (
+      <ProtectedRoute>
+        <CountDown />
+      </ProtectedRoute>
+    ),
+  },
+  { path: '*', element: <PageNotFound /> } // Redirect all unknown paths to home
+]);
 
 function App() {
   return (
-    <>
     <Flex className="h-screen">
       <Layout>
-        <Content>
-          <Flex gap="middle" justify="center" align="center" vertical className="h-full">
-            <h1 className="font-bold text-center text-4xl pt-4">This is a Work in Progress project.</h1>
-            <h2 className="text-2xl text-center p-4">Working with you soon!</h2>
-          </Flex>
+        <Content className='bg-white'>
+            <RouterProvider router={router} />
         </Content>
-        <Footer>
-          <h1 className="text-l text-center font-bold p-2">© Joshua Felipe 2025</h1>
+        <Footer style={{ background: 'white' }}>
+          <h1 className="text-l text-center font-bold p-2">© 2025 Joshua Felipe</h1>
         </Footer>
       </Layout>
-      </Flex>
-    </>
-  )
+    </Flex>
+);
 }
 
 export default App

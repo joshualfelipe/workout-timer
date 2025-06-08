@@ -11,10 +11,13 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.3.0",
     "@tailwindcss/vite": "^4.1.8",
     "antd": "^5.25.4",
     "react": "^19.1.0",
+    "react-countdown-circle-timer": "^3.2.1",
     "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.2",
     "tailwindcss": "^4.1.8"
   },
   "devDependencies": {
