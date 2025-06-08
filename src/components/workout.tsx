@@ -21,6 +21,9 @@ function CountDown() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [pauseText, setPauseText] = useState('Pause');
+  const [workoutCompleted, setWorkoutCompleted] = useState(false);
+
+  console.log('Workout Values:', workoutValues);
 
   const sequence = [];
   let count = 0;
@@ -44,7 +47,8 @@ function CountDown() {
   // show start screen before timer begins
   if (!started) {
     return (
-      <Flex gap="middle" justify="center" align="center" className="h-screen">
+      <Flex gap="middle" justify="center" align="center" className="h-screen" vertical>
+        {workoutCompleted && <h1 className="font-bold text-7xl text-center p-4">Workout Completed!</h1>}
         <Link to="/"><Button type="primary" size="large">Go Home</Button></Link>
         <Button type="primary" size="large" onClick={() => { setStarted(true); setCurrentStep(0); }}>
           Start Workout
@@ -55,6 +59,7 @@ function CountDown() {
 
   // render only the current step
   const step = sequence[currentStep];
+  console.log(sequence)
   if (!step) {
     // workout is finished, reset state
     setStarted(false);
@@ -84,6 +89,12 @@ function CountDown() {
         colors={['#004777', '#F7B801', '#A30000', '#A30000']}
         colorsTime={[step.time * 0.75, step.time * 0.5, step.time * 0.25, 0]}
         onComplete={() => {
+            if (currentStep === sequence.length - 1) {
+              setStarted(false);
+              setCurrentStep(0);
+              setWorkoutCompleted(true);
+              return;
+            }
           setCurrentStep(i => i + 1);
           return { shouldRepeat: false, delay: 1 };
         }}
@@ -98,6 +109,12 @@ function CountDown() {
           type="primary"
           size="large"
           onClick={() => {
+            if (currentStep === sequence.length - 1) {
+              setStarted(false);
+              setCurrentStep(0);
+              setWorkoutCompleted(true);
+              return;
+            }
             setCurrentStep(i => i + 1);
           }}
           >Skip</Button>
