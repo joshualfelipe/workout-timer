@@ -23,8 +23,6 @@ function CountDown() {
   const [pauseText, setPauseText] = useState('Pause');
   const [workoutCompleted, setWorkoutCompleted] = useState(false);
 
-  console.log('Workout Values:', workoutValues);
-
   const sequence = [];
   let count = 0;
   const sides = ['RIGHT', 'LEFT'];
@@ -59,7 +57,6 @@ function CountDown() {
 
   // render only the current step
   const step = sequence[currentStep];
-  console.log(sequence)
   if (!step) {
     // workout is finished, reset state
     setStarted(false);
