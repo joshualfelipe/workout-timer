@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css'
-import Home from './Home.tsx';
-import PageNotFound from './PageNotFound.tsx';
-import CountDown from './workout.tsx';
-import ProtectedRoute from './ProtectedRoute.tsx';
+import Home from './components/Home.tsx';
+import PageNotFound from './components/PageNotFound.tsx';
+import CountDown from './components/workout.tsx';
+import ProtectedRoute from './components/ProtectedRoute.tsx';
 
 
 const router = createBrowserRouter([
